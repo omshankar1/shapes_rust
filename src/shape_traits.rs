@@ -31,6 +31,7 @@ impl Shape for Rectangle {
 }
 
 // consume: a polymorphic function
+// that takes any thing that implements 'Shape'
 fn consume(shape: impl Shape) {
     println!(
         "Shape is a {}. Its area is {}.",
@@ -48,14 +49,15 @@ pub fn shape_traits() {
         width: 3.,
         height: 5.,
     });
-    // I can't have a collection of intances that impl Shape
-    // let shapes: Vec<impl shape_traits::Shape> = vec![
-    //     shape_traits::Square { side: 5. },
-    //     shape_traits::Rectangle {
+    // I can't have a collection of instances that impl Shape
+
+    // let shapes: Vec<impl Shape> = vec![
+    //     Square { side: 5. },
+    //     Rectangle {
     //         width: 3.,
     //         height: 5.,
     //     },
-    //     shape_traits::Rectangle {
+    //     Rectangle {
     //         width: 3.,
     //         height: 5.,
     //     },
@@ -66,8 +68,12 @@ pub fn shape_traits() {
 }
 
 pub fn shape_boxed() {
-    // Shape Boxed(Dynamic dispatch)
     println!("\n************Shape Dynamic(Box) Dispatch*********");
+    // Shape Boxed(Dynamic dispatch)
+    // Collection of instances that impl Shape
+    // Vec<Box<dyn Shape>> - to disambiguate the behaviour associated with
+    // boxed items
+
     let shapes: Vec<Box<dyn Shape>> = vec![
         Box::new(Square { side: 5. }),
         Box::new(Rectangle {
