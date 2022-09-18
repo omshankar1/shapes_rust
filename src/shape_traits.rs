@@ -7,6 +7,12 @@ pub struct Square {
     pub side: f64,
 }
 
+impl Square {
+    fn sizeof(&self) -> usize {
+        std::mem::size_of::<Self>()
+    }
+}
+
 impl Shape for Square {
     fn shape(&self) -> &'static str {
         "square"
@@ -21,6 +27,12 @@ pub struct Rectangle {
     pub height: f64,
 }
 
+impl Rectangle {
+    fn sizeof(&self) -> usize {
+        std::mem::size_of::<Self>()
+    }
+}
+
 impl Shape for Rectangle {
     fn shape(&self) -> &'static str {
         "rectangle"
@@ -30,6 +42,24 @@ impl Shape for Rectangle {
     }
 }
 
+pub struct Circle {
+    pub radius: f64,
+}
+
+impl Circle {
+    fn sizeof(&self) -> usize {
+        std::mem::size_of::<Self>()
+    }
+}
+
+impl Shape for Circle {
+    fn shape(&self) -> &'static str {
+        "Circle"
+    }
+    fn area(&self) -> f64 {
+        self.radius * self.radius * 3.14
+    }
+}
 // consume: a polymorphic function
 // that takes any thing that implements 'Shape'
 fn consume<T: Shape>(shape: T) {
@@ -41,14 +71,21 @@ fn consume<T: Shape>(shape: T) {
 }
 
 pub fn shape_traits() {
+    let square1 = Square { side: 5. };
+    let rectangle1 = Rectangle {
+        width: 5.,
+        height: 5.,
+    };
+    let circle1 = Circle { radius: 5. };
+    println!("Sizeof Square: {}", square1.sizeof());
+    println!("Sizeof Rectangle: {}", rectangle1.sizeof());
+    println!("Sizeof Circle: {}", circle1.sizeof());
     println!("\n************Shape Static(traits) Dispatch*********\n");
     // consume Square
-    consume(Square { side: 5. });
+    consume(square1);
     // consume Rectangle
-    consume(Rectangle {
-        width: 3.,
-        height: 5.,
-    });
+    consume(rectangle1);
+    consume(circle1);
     // I can't have a collection of instances that impl Shape
 
     // let shapes: Vec<impl Shape> = vec![
@@ -66,8 +103,7 @@ pub fn shape_traits() {
     //     println!("{}: {}", shape.shape(), shape.area());
     // }
 
-    // Issue: Vec needs to know the size of the item thats getting
-    // pushed in.
+    // Issue: Vec stored homogenous types
     // 1. Hide behind a reference (Heap/Stack)
     // 2. Create an Enum and store it in Vec.
 }

@@ -26,9 +26,7 @@ impl Shape {
 }
 
 pub fn shape_enum() {
-    println!();
-    println!("**************Shape Enums**********");
-    println!();
+    println!("\n**************Shape Enums**********\n");
     let shapes: Vec<Shape> = vec![
         Shape::Square { side: 5.0 },
         Shape::Rectangle {
@@ -39,6 +37,11 @@ pub fn shape_enum() {
     ];
 
     for shape in &shapes {
-        println!("{} area={}", shape.name(), shape.area().unwrap_or(0.0));
+        println!(
+            "Size: {} | Type: {} | area={}",
+            std::mem::size_of::<Shape>(),
+            shape.name(),
+            shape.area().unwrap_or(0.0)
+        );
     }
 }
