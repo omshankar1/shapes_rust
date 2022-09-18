@@ -38,7 +38,7 @@ pub fn shape_enum() {
 
     for shape in &shapes {
         println!(
-            "Size: {} | Type: {} | area={}",
+            "Size Shape: {} | Type: {} | area={}",
             std::mem::size_of::<Shape>(),
             shape.name(),
             shape.area().unwrap_or(0.0)

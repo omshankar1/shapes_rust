@@ -77,9 +77,9 @@ pub fn shape_traits() {
         height: 5.,
     };
     let circle1 = Circle { radius: 5. };
-    println!("Sizeof Square: {}", square1.sizeof());
-    println!("Sizeof Rectangle: {}", rectangle1.sizeof());
-    println!("Sizeof Circle: {}", circle1.sizeof());
+    println!("Size Square: {}", square1.sizeof());
+    println!("Size Rectangle: {}", rectangle1.sizeof());
+    println!("Size Circle: {}", circle1.sizeof());
     println!("\n************Shape Static(traits) Dispatch*********\n");
     // consume Square
     consume(square1);
