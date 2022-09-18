@@ -32,7 +32,7 @@ impl Shape for Rectangle {
 
 // consume: a polymorphic function
 // that takes any thing that implements 'Shape'
-fn consume(shape: impl Shape) {
+fn consume<T: Shape>(shape: T) {
     println!(
         "Shape is a {}. Its area is {}.",
         shape.shape(),
@@ -42,9 +42,9 @@ fn consume(shape: impl Shape) {
 
 pub fn shape_traits() {
     println!("\n************Shape Static(traits) Dispatch*********\n");
-    let sqr = Square { side: 5. };
-    // consume a polymorphic function
-    consume(sqr);
+    // consume Square
+    consume(Square { side: 5. });
+    // consume Rectangle
     consume(Rectangle {
         width: 3.,
         height: 5.,
@@ -65,6 +65,11 @@ pub fn shape_traits() {
     // for shape in &shapes {
     //     println!("{}: {}", shape.shape(), shape.area());
     // }
+
+    // Issue: Vec needs to know the size of the item thats getting
+    // pushed in.
+    // 1. Hide behind a reference (Heap/Stack)
+    // 2. Create an Enum and store it in Vec.
 }
 
 pub fn shape_boxed() {
