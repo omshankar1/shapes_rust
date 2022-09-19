@@ -1,5 +1,5 @@
 pub trait Shape {
-    fn shape(&self) -> &'static str;
+    fn name(&self) -> &'static str;
     fn area(&self) -> f64;
 }
 
@@ -14,7 +14,7 @@ impl Square {
 }
 
 impl Shape for Square {
-    fn shape(&self) -> &'static str {
+    fn name(&self) -> &'static str {
         "square"
     }
     fn area(&self) -> f64 {
@@ -34,7 +34,7 @@ impl Rectangle {
 }
 
 impl Shape for Rectangle {
-    fn shape(&self) -> &'static str {
+    fn name(&self) -> &'static str {
         "rectangle"
     }
     fn area(&self) -> f64 {
@@ -53,7 +53,7 @@ impl Circle {
 }
 
 impl Shape for Circle {
-    fn shape(&self) -> &'static str {
+    fn name(&self) -> &'static str {
         "Circle"
     }
     fn area(&self) -> f64 {
@@ -63,11 +63,7 @@ impl Shape for Circle {
 // consume: a polymorphic function
 // that takes any thing that implements 'Shape'
 fn consume<T: Shape>(shape: T) {
-    println!(
-        "Shape is a {}. Its area is {}.",
-        shape.shape(),
-        shape.area()
-    );
+    println!("Shape is a {}. Its area is {}.", shape.name(), shape.area());
 }
 
 pub fn shape_traits() {
@@ -100,7 +96,7 @@ pub fn shape_traits() {
     //     },
     // ];
     // for shape in &shapes {
-    //     println!("{}: {}", shape.shape(), shape.area());
+    //     println!("{}: {}", shape.name(), shape.area());
     // }
 
     // Issue: Vec stored homogenous types
@@ -128,6 +124,6 @@ pub fn shape_boxed() {
     ];
 
     for shape in &shapes {
-        println!("{}: {}", shape.shape(), shape.area());
+        println!("{}: {}", shape.name(), shape.area());
     }
 }
