@@ -5,11 +5,12 @@ pub trait Shape {
 }
 
 // consume: a polymorphic function
-// that takes any thing that implements 'Shape'
+// that takes any T as long as T implements the trait 'Shape'
 fn consume<T: Shape>(shape: T) {
     println!("Shape is a {}. Its area is {}.", shape.name(), shape.area());
 }
 
+// Structs Square
 pub struct Square {
     pub side: f64,
 }
