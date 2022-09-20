@@ -1,6 +1,13 @@
+// Trait definition
 pub trait Shape {
     fn name(&self) -> &'static str;
     fn area(&self) -> f64;
+}
+
+// consume: a polymorphic function
+// that takes any thing that implements 'Shape'
+fn consume<T: Shape>(shape: T) {
+    println!("Shape is a {}. Its area is {}.", shape.name(), shape.area());
 }
 
 pub struct Square {
@@ -13,6 +20,7 @@ impl Square {
     }
 }
 
+// implement Trait 'Shape' for Square
 impl Shape for Square {
     fn name(&self) -> &'static str {
         "square"
@@ -33,6 +41,7 @@ impl Rectangle {
     }
 }
 
+// implement Trait 'Shape' for Rectangle
 impl Shape for Rectangle {
     fn name(&self) -> &'static str {
         "rectangle"
@@ -52,6 +61,7 @@ impl Circle {
     }
 }
 
+// implement Trait 'Shape' for Circle
 impl Shape for Circle {
     fn name(&self) -> &'static str {
         "Circle"
@@ -59,11 +69,6 @@ impl Shape for Circle {
     fn area(&self) -> f64 {
         self.radius * self.radius * 3.14
     }
-}
-// consume: a polymorphic function
-// that takes any thing that implements 'Shape'
-fn consume<T: Shape>(shape: T) {
-    println!("Shape is a {}. Its area is {}.", shape.name(), shape.area());
 }
 
 pub fn shape_traits() {
