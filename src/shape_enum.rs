@@ -1,4 +1,5 @@
 #![allow(dead_code)]
+// Rust enum are SUM types, the variants can have data associated with it
 pub enum Shape {
     Square { side: f64 },
     Rectangle { width: f64, height: f64 },
@@ -7,6 +8,7 @@ pub enum Shape {
 
 impl Shape {
     pub fn name(&self) -> String {
+        // Pattern matching
         match self {
             Shape::Square { side } => format!("Square side {side}"),
             Shape::Rectangle { width, height } => {
